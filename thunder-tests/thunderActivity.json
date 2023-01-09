@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "49d06995-5a68-4006-8615-c6588649c78d",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:8080/todos",
+    "url": "{{url}}/todos",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-09T01:01:17.858Z",
+    "modified": "2023-01-09T01:05:02.248Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
