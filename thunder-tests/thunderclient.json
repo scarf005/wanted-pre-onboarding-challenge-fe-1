@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-01-09T01:05:26.535Z",
-    "modified": "2023-01-09T01:14:55.922Z",
+    "modified": "2023-01-09T01:30:16.136Z",
     "headers": [
       {
         "name": "Authorization",
@@ -16,7 +16,8 @@
       }
     ],
     "params": [],
-    "tests": []
+    "tests": [],
+    "docs": "\n## getTodos\n\n### URL\n\n- GET `/todos`\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": [\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    },\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    }\n  ]\n}\n```"
   },
   {
     "_id": "5355664d-f7ba-461a-b91e-c498725953d1",
@@ -27,7 +28,7 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-01-09T01:05:49.622Z",
-    "modified": "2023-01-09T01:09:15.263Z",
+    "modified": "2023-01-09T01:36:28.238Z",
     "headers": [],
     "params": [],
     "body": {
@@ -35,7 +36,8 @@
       "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password\"\n}",
       "form": []
     },
-    "tests": []
+    "tests": [],
+    "docs": "## login\n\n### URL\n\n- POST `/users/login`\n- Parameter\n  - email: string\n  - password: string\n\n### 응답 예시\n\n```json\n{\n  \"message\": \"성공적으로 로그인 했습니다\",\n  \"token\": \"eyJhbGciOiJIUzI1NiJ9.YXNkZkBhc2RmYXNkZi5jb20.h-oLZnV0pCeNKa_AM3ilQzerD2Uj7bKUn1xDft5DzOk\"\n}\n```"
   },
   {
     "_id": "acff4fdf-61ab-422a-947e-d623008348a7",
@@ -46,7 +48,7 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-01-09T01:07:56.988Z",
-    "modified": "2023-01-09T01:09:16.278Z",
+    "modified": "2023-01-09T01:36:20.706Z",
     "headers": [],
     "params": [],
     "body": {
@@ -54,7 +56,8 @@
       "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password\"\n}",
       "form": []
     },
-    "tests": []
+    "tests": [],
+    "docs": "## signUp\n\n### URL\n\n- POST `/users/create`\n- Parameter\n  - email: string\n  - password: string\n\n### 응답 예시\n\n```json\n{\n  \"message\": \"계정이 성공적으로 생성되었습니다\",\n  \"token\": \"eyJhbGciOiJIUzI1NiJ9.YXNkZkBhc2RmYXNkZi5jb20.h-oLZnV0pCeNKa_AM3ilQzerD2Uj7bKUn1xDft5DzOk\"\n}\n```"
   },
   {
     "_id": "24d095bf-07b3-4471-b5c9-199e18e4354b",
@@ -63,9 +66,9 @@
     "name": "getTodoById",
     "url": "{{url}}/todos/{id}",
     "method": "GET",
-    "sortNum": 60000,
+    "sortNum": 22500,
     "created": "2023-01-09T01:09:44.527Z",
-    "modified": "2023-01-09T01:15:00.789Z",
+    "modified": "2023-01-09T01:34:42.384Z",
     "headers": [
       {
         "name": "Authorization",
@@ -79,7 +82,8 @@
         "isPath": true
       }
     ],
-    "tests": []
+    "tests": [],
+    "docs": "\n## getTodoById\n\n### URL\n\n- GET `/todos/:id`\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": {\n    \"title\": \"hi\",\n    \"content\": \"hello\",\n    \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n    \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n    \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n  }\n}\n```\n"
   },
   {
     "_id": "b254f8d7-8a1f-450c-a74b-68a3c706d696",
@@ -88,9 +92,9 @@
     "name": "createTodo",
     "url": "{{url}}/todos",
     "method": "POST",
-    "sortNum": 70000,
+    "sortNum": 35000,
     "created": "2023-01-09T01:12:40.317Z",
-    "modified": "2023-01-09T01:13:46.398Z",
+    "modified": "2023-01-09T01:34:59.459Z",
     "headers": [
       {
         "name": "Authorization",
@@ -103,7 +107,8 @@
       "raw": "{\n  \"title\": \"title\",\n  \"content\": \"content\"\n}",
       "form": []
     },
-    "tests": []
+    "tests": [],
+    "docs": "\n## createTodo\n\n### URL\n\n- POST `/todos`\n- Parameter\n  - title: string\n  - content: string\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": {\n    \"title\": \"hi\",\n    \"content\": \"hello\",\n    \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n    \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n    \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n  }\n}\n```"
   },
   {
     "_id": "09d7fc16-0a2b-4835-a9ae-7201500bafc8",
@@ -114,7 +119,7 @@
     "method": "PUT",
     "sortNum": 80000,
     "created": "2023-01-09T01:14:10.118Z",
-    "modified": "2023-01-09T01:27:39.019Z",
+    "modified": "2023-01-09T01:35:58.962Z",
     "headers": [
       {
         "name": "Authorization",
@@ -133,7 +138,8 @@
       "raw": "{\n  \"title\": \"title\",\n  \"content\": \"content\"\n}",
       "form": []
     },
-    "tests": []
+    "tests": [],
+    "docs": "\n## updateTodo\n\n### URL\n\n- PUT `/todos/:id`\n- Parameter\n  - title: string\n  - content: string\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": {\n    \"title\": \"제목 변경\",\n    \"content\": \"내용 변경\",\n    \"id\": \"RMfi3XyOKoI5zd0A_bsPL\",\n    \"createdAt\": \"2022-07-24T14:25:48.627Z\",\n    \"updatedAt\": \"2022-07-24T14:25:48.627Z\"\n  }\n}\n```"
   },
   {
     "_id": "ac24d2e5-c9d7-45bb-80ca-f562cd3e4638",
@@ -144,7 +150,7 @@
     "method": "DELETE",
     "sortNum": 90000,
     "created": "2023-01-09T01:15:13.622Z",
-    "modified": "2023-01-09T01:15:44.586Z",
+    "modified": "2023-01-09T01:36:07.806Z",
     "headers": [
       {
         "name": "Authorization",
@@ -158,6 +164,7 @@
         "isPath": true
       }
     ],
-    "tests": []
+    "tests": [],
+    "docs": "\n## deleteTodo\n\n### URL\n\n- DELETE `/todos/:id`\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": null\n}\n```\n\n# <span id=\"auth\">1-4) Auth</span>\n\n## login\n\n### URL\n\n- POST `/users/login`\n- Parameter\n  - email: string\n  - password: string\n\n### 응답 예시\n\n```json\n{\n  \"message\": \"성공적으로 로그인 했습니다\",\n  \"token\": \"eyJhbGciOiJIUzI1NiJ9.YXNkZkBhc2RmYXNkZi5jb20.h-oLZnV0pCeNKa_AM3ilQzerD2Uj7bKUn1xDft5DzOk\"\n}\n```"
   }
 ]
