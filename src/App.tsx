@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Sign, Todo } from 'routes'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { atom, useAtomValue } from 'jotai'
+import { tokenAtom } from 'atom'
+export const queryClient = new QueryClient()
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Todo />,
+  },
+  {
+    path: '/auth',
+    element: <Sign />,
+  },
+])
 
+export const App = () => {
+  const token = useAtomValue(tokenAtom)
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      url: {import.meta.env.VITE_API_URL}
+      token: {token}
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
-
-export default App
