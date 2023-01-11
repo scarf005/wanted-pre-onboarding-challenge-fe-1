@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-01-09T01:05:26.535Z",
-    "modified": "2023-01-09T01:30:16.136Z",
+    "modified": "2023-01-10T14:13:24.399Z",
     "headers": [
       {
         "name": "Authorization",
@@ -17,7 +17,7 @@
     ],
     "params": [],
     "tests": [],
-    "docs": "\n## getTodos\n\n### URL\n\n- GET `/todos`\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": [\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    },\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    }\n  ]\n}\n```"
+    "docs": "## getTodos\n\n### URL\n\n- GET `/todos`\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": [\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    },\n    {\n      \"title\": \"hi\",\n      \"content\": \"hello\",\n      \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n      \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n      \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n    }\n  ]\n}\n```"
   },
   {
     "_id": "5355664d-f7ba-461a-b91e-c498725953d1",
@@ -94,11 +94,11 @@
     "method": "POST",
     "sortNum": 35000,
     "created": "2023-01-09T01:12:40.317Z",
-    "modified": "2023-01-09T01:34:59.459Z",
+    "modified": "2023-01-10T14:21:19.890Z",
     "headers": [
       {
         "name": "Authorization",
-        "value": "{{token}}"
+        "value": "eyJhbGciOiJIUzI1NiJ9.dGVzdEBmb28uY29t.Fmzm1Xe-0Je2GiwsHEg27AOEYWdhXljULh3vBocqZjE"
       }
     ],
     "params": [],
@@ -108,7 +108,7 @@
       "form": []
     },
     "tests": [],
-    "docs": "\n## createTodo\n\n### URL\n\n- POST `/todos`\n- Parameter\n  - title: string\n  - content: string\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": {\n    \"title\": \"hi\",\n    \"content\": \"hello\",\n    \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n    \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n    \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n  }\n}\n```"
+    "docs": "## createTodo\n\n### URL\n\n- POST `/todos`\n- Parameter\n  - title: string\n  - content: string\n- Headers\n  - Authorization: login token\n\n### 응답 예시\n\n```json\n{\n  \"data\": {\n    \"title\": \"hi\",\n    \"content\": \"hello\",\n    \"id\": \"z3FGrcRL55qDCFnP4KRtn\",\n    \"createdAt\": \"2022-07-24T14:15:55.537Z\",\n    \"updatedAt\": \"2022-07-24T14:15:55.537Z\"\n  }\n}\n```"
   },
   {
     "_id": "09d7fc16-0a2b-4835-a9ae-7201500bafc8",
