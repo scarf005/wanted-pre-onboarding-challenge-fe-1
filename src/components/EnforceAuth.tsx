@@ -1,9 +1,8 @@
 import { redirect } from 'react-router-dom'
-import { atom, useAtomValue } from 'jotai'
-import { tokenAtom } from 'atom'
+import { useAtomValue } from 'jotai'
+import { isLoggedInAtom } from 'atom'
 import { Button } from '@mantine/core'
 
-const isLoggedInAtom = atom((get) => get(tokenAtom) !== '')
 export const EnforceAuth = ({
   children,
 }: { children: JSX.Element }): JSX.Element =>

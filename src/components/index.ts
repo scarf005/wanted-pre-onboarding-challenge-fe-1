@@ -1,4 +1,5 @@
 export * from './AddTodo'
+export * from './AuthButton'
 export * from './EnforceAuth'
 export * from './TodoItem'
 export * from './TodoPreview'
