@@ -1,15 +1,23 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Sign, Todo } from 'routes'
+import { Sign, TodoPreview } from 'routes'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { atom, useAtomValue } from 'jotai'
+import { useAtomValue } from 'jotai'
 import { tokenAtom } from 'atom'
+import { EnforceAuth } from 'EnforceAuth'
+import { SimpleGrid } from '@mantine/core'
 export const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Todo />,
+    element: (
+      <EnforceAuth>
+        <SimpleGrid cols={2}>
+          <TodoPreview />
+        </SimpleGrid>
+      </EnforceAuth>
+    ),
   },
   {
     path: '/auth',
@@ -21,8 +29,6 @@ export const App = () => {
   const token = useAtomValue(tokenAtom)
   return (
     <QueryClientProvider client={queryClient}>
-      url: {import.meta.env.VITE_API_URL}
-      token: {token}
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
