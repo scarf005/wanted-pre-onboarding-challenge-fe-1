@@ -1,25 +1,19 @@
 import { useQuery } from 'react-query'
 import { getTodos } from 'api'
-import { Button, Group, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Button, Skeleton, Stack, Text } from '@mantine/core'
 import { ErrorResponse, Todo, TodoResponse } from 'types'
 import { redirect, useNavigate } from 'react-router-dom'
 import { match } from 'ts-pattern'
-import { naturals } from './TodoSkeleton'
+import { naturals } from '../components/TodoSkeleton'
+import { TodoItem } from '../components/TodoItem'
 
-const truncate = (s: string, length = 10) =>
+export const truncate = (s: string, length = 10) =>
   s.length <= length ? s : `${s.slice(0, length)}...`
 
 const truncatedTodo = (todo: Todo): Todo => {
   const { title, content } = todo
   return { ...todo, title: truncate(title), content: truncate(content) }
 }
-
-const TodoItem = ({ todo }: { todo: Todo }) => (
-  <Group>
-    <Title order={4}>{todo.title}</Title>
-    <Text>{truncate(todo.content)}</Text>
-  </Group>
-)
 
 const todoList = (todos: Todo[]) => () =>
   (

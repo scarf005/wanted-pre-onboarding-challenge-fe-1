@@ -1,11 +1,12 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Sign, TodoPreview } from 'routes'
+import { Sign } from 'routes'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useAtomValue } from 'jotai'
 import { tokenAtom } from 'atom'
-import { EnforceAuth } from 'EnforceAuth'
-import { SimpleGrid } from '@mantine/core'
+import { EnforceAuth } from 'components'
+import { AppShell, Header, Navbar, Text, Title } from '@mantine/core'
+import { Home } from 'Panel'
 export const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -13,9 +14,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <EnforceAuth>
-        <SimpleGrid cols={2}>
-          <TodoPreview />
-        </SimpleGrid>
+        <Home />
       </EnforceAuth>
     ),
   },
@@ -26,10 +25,19 @@ const router = createBrowserRouter([
 ])
 
 export const App = () => {
-  const token = useAtomValue(tokenAtom)
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AppShell
+        padding='md'
+        header={
+          <Header height={40}>
+            <Title>TODO</Title>
+          </Header>
+        }
+      >
+        <RouterProvider router={router} />
+      </AppShell>
+
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
