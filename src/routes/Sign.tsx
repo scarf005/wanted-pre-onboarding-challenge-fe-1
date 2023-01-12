@@ -2,18 +2,17 @@ import { hasLength, useForm } from '@mantine/form'
 import { AuthInput, ErrorResponse } from 'types'
 import { isEmail } from '@mantine/form'
 import {
-  Box,
   Button,
   Group,
   SimpleGrid,
   TextInput,
-  filterProps,
+  PasswordInput,
 } from '@mantine/core'
 import { login, signUp } from 'api'
 import { queryClient } from 'App'
 import { tokenAtom } from 'atom'
-import { useMutation } from 'react-query'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useMutation } from '@tanstack/react-query'
+import { useSetAtom } from 'jotai'
 
 const PASSWORD_LENGTH = 8 as const
 
@@ -36,7 +35,7 @@ export const Sign = () => {
   const loginMutation = useMutation(login, {
     onSuccess: (value) => {
       setToken(value.token)
-      queryClient.invalidateQueries('todos')
+      queryClient.invalidateQueries(['todos'])
     },
     onError: (error: ErrorResponse) => {
       console.error(error.details)
@@ -45,7 +44,7 @@ export const Sign = () => {
   const signUpMutation = useMutation(signUp, {
     onSuccess: (value) => {
       setToken(value.token)
-      queryClient.invalidateQueries('todos')
+      queryClient.invalidateQueries(['todos'])
     },
     onError: (error: ErrorResponse) => {
       console.error(error.details)
@@ -65,7 +64,7 @@ export const Sign = () => {
           withAsterisk
           {...form.getInputProps('email')}
         />
-        <TextInput
+        <PasswordInput
           label="password"
           placeholder='password'
           withAsterisk
@@ -86,7 +85,7 @@ export const Sign = () => {
           withAsterisk
           {...form.getInputProps('email')}
         />
-        <TextInput
+        <PasswordInput
           label="password"
           placeholder='password'
           withAsterisk

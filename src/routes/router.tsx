@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { Home, Sign } from 'routes'
 import { paths } from './paths'
-import { AppShell, Group, Header, Title } from '@mantine/core'
+import { AppShell, Button, Group, Header, Title } from '@mantine/core'
 import { AuthButton, EnforceAuth } from 'components'
 
 export const AppShelled = ({ foo }: { foo: JSX.Element }) => (
