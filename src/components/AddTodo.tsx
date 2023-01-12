@@ -1,10 +1,10 @@
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { createTodo } from 'api'
 import { queryClient } from 'App'
 
 const AddTodo = () => {
   const mutation = useMutation(createTodo, {
-    onSuccess: () => queryClient.invalidateQueries('todos'),
+    onSuccess: () => queryClient.invalidateQueries(['todos']),
   })
 
   return (
