@@ -1,6 +1,6 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { RouterProvider } from 'react-router-dom'
-import { ReactQueryDevtools } from 'react-query/devtools'
 import { router } from 'routes'
 
 export const queryClient = new QueryClient()

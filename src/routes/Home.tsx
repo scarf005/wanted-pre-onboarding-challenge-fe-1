@@ -1,19 +1,32 @@
 import { TodoPreview } from 'components'
-import { SimpleGrid, Stack, Textarea, Title } from '@mantine/core'
-import { getTodos } from 'api'
-import { useQuery } from 'react-query'
+import { SimpleGrid, Skeleton, Stack, Textarea, Title } from '@mantine/core'
+import { getTodoById, getTodos } from 'api'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-export const Editor = () => {
-  const { data: todos, status } = useQuery('todos', getTodos)
-  const location = useLocation()
+const todoQuery = (id: string) => ({
+  queryKey: ['todos', id],
+  queryFn: () => getTodoById(id),
+})
 
-  // const [text, setText] = useState()
+export const Editor = () => {
+  
+}
+
+export const Content = () => {
+  const location = useLocation()
+  const id = location.pathname.split('/').at(-1) as string
+
+  const { data: todo, isSuccess } = useQuery(todoQuery(id))
+
+  if (!isSuccess) {
+    return <Skeleton height="80vh" />
+  }
 
   return (
     <Stack>
-      <Title>{location.pathname}</Title>
+      <Title>{todo.title}</Title>
       <Textarea />
     </Stack>
   )
@@ -23,7 +36,7 @@ export const Home = () => {
   return (
     <SimpleGrid cols={2}>
       <TodoPreview />
-      <Editor />
+      <Content />
     </SimpleGrid>
   )
 }

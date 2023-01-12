@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+// import { useQuery } from 'react-query'
 import { getTodos } from 'api'
 import { Button, Skeleton, Stack, Text } from '@mantine/core'
 import { ErrorResponse, Todo, TodoResponse } from 'types'
@@ -7,6 +7,7 @@ import { match } from 'ts-pattern'
 import { naturals, todoSkeletons } from './TodoSkeleton'
 import { TodoItem } from './TodoItem'
 import { truncate } from '../utils/truncate'
+import { useQuery } from '@tanstack/react-query'
 
 const truncatedTodo = (todo: Todo): Todo => {
   const { title, content } = todo
@@ -23,7 +24,7 @@ const todoList = (todos: Todo[]) => () =>
   )
 
 export const TodoPreview = () => {
-  const { data: todos, status } = useQuery('todos', getTodos)
+  const { data: todos, status } = useQuery({ queryKey: ['todos'], queryFn: getTodos})
 
   const content = match(status)
     .with('loading', () => todoSkeletons)
