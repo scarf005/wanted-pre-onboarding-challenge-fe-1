@@ -56,7 +56,7 @@ export const createTodo = (json: TodoInput) =>
 
 [ky]: https://github.com/sindresorhus/ky
 [jotai]: https://jotai.org
-[react query]: https://react-query-v3.tanstack.com/
+[react query]: https://tanstack.com/query/latest/docs/react/overview
 [react-router-dom(v6)]: https://github.com/remix-run/react-router
 [mantine]: https://mantine.dev
 [rome]: https://rome.tools/
