@@ -15,6 +15,7 @@ specifiers:
   react-query: ^3.39.2
   react-router-dom: ^6.6.1
   rome: ^11.0.0
+  ts-pattern: ^4.1.2
   typescript: ^4.9.3
   vite: ^4.0.0
   vite-tsconfig-paths: ^4.0.3
@@ -30,6 +31,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
+  ts-pattern: 4.1.2
 
 devDependencies:
   '@types/react': 18.0.26
@@ -1387,6 +1389,10 @@ packages:
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
+    dev: false
+
+  /ts-pattern/4.1.2:
+    resolution: {integrity: sha512-R/NEQHgeQwiyQyD5++s8rVB6jC1c6KiHHac2GEm0Pf82p3dth7s/kZfSimcUkVLjz+bPJn12721Vw9sbMpY5Rw==}
     dev: false
 
   /tsconfck/2.0.2_typescript@4.9.4:
