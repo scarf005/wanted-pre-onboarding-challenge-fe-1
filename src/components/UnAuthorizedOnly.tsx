@@ -8,17 +8,17 @@ type ValueOf<T> = T[keyof T]
 
 type Props = {
   path: ValueOf<typeof paths>
-  children: JSX.Element
+  element: JSX.Element
 }
 
 export const UnAuthorizedOnly = ({
   path = paths.root,
-  children,
+  element,
 }: Props): JSX.Element => {
   const navigate = useNavigate()
 
   if (useAtomValue(isLoggedInAtom)) {
     navigate(path)
   }
-  return children
+  return element
 }
