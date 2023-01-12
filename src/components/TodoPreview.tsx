@@ -4,11 +4,9 @@ import { Button, Skeleton, Stack, Text } from '@mantine/core'
 import { ErrorResponse, Todo, TodoResponse } from 'types'
 import { redirect, useNavigate } from 'react-router-dom'
 import { match } from 'ts-pattern'
-import { naturals } from '../components/TodoSkeleton'
-import { TodoItem } from '../components/TodoItem'
-
-export const truncate = (s: string, length = 10) =>
-  s.length <= length ? s : `${s.slice(0, length)}...`
+import { naturals, todoSkeletons } from './TodoSkeleton'
+import { TodoItem } from './TodoItem'
+import { truncate } from '../utils/truncate'
 
 const truncatedTodo = (todo: Todo): Todo => {
   const { title, content } = todo
@@ -25,12 +23,12 @@ const todoList = (todos: Todo[]) => () =>
   )
 
 export const TodoPreview = () => {
-  const { data, status } = useQuery('todos', getTodos)
+  const { data: todos, status } = useQuery('todos', getTodos)
 
   const content = match(status)
-    .with('loading', () => naturals(5).map((i) => <Skeleton key={i} />))
+    .with('loading', () => todoSkeletons)
     .with('error', () => <Text>조금 뒤 새로고침해주세요</Text>)
-    .otherwise(todoList(data!))
+    .otherwise(todoList(todos!))
 
   return <Stack>{content}</Stack>
 }

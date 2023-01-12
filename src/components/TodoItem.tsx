@@ -1,10 +1,18 @@
-import { Group, Text, Title } from '@mantine/core'
+import { NavLink } from '@mantine/core'
 import { Todo } from 'types'
-import { truncate } from '../routes/TodoList'
+import { useNavigate } from 'react-router-dom'
+import { truncate } from '../utils/truncate'
 
-export const TodoItem = ({ todo }: { todo: Todo }) => (
-  <Group>
-    <Title order={4}>{todo.title}</Title>
-    <Text>{truncate(todo.content)}</Text>
-  </Group>
-)
+type Props = { todo: Todo }
+export const TodoItem = ({ todo }: Props) => {
+  const { id, title, content, updatedAt, createdAt } = todo
+  const navigate = useNavigate()
+
+  return (
+    <NavLink
+      onClick={() => navigate(`/todos/${id}`)}
+      label={title}
+      description={`${truncate(content)}`}
+    />
+  )
+}

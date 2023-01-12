@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai'
 import { tokenAtom } from 'atom'
 import { EnforceAuth } from 'components'
 import { AppShell, Header, Navbar, Text, Title } from '@mantine/core'
-import { Home } from 'Panel'
+import { Home } from 'routes'
 export const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -19,7 +19,11 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/auth',
+    path: '/auth/create',
+    element: <Sign />,
+  },
+  {
+    path: '/auth/login',
     element: <Sign />,
   },
 ])
