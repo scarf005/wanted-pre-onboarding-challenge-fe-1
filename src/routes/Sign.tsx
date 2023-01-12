@@ -13,6 +13,8 @@ import { queryClient } from 'App'
 import { tokenAtom } from 'atom'
 import { useMutation } from '@tanstack/react-query'
 import { useSetAtom } from 'jotai'
+import { useNavigate } from 'react-router-dom'
+import { paths } from './paths'
 
 const PASSWORD_LENGTH = 8 as const
 
@@ -31,70 +33,75 @@ export const Sign = () => {
     },
   })
   const setToken = useSetAtom(tokenAtom)
-
+  const navigate = useNavigate()
   const loginMutation = useMutation(login, {
     onSuccess: (value) => {
       setToken(value.token)
       queryClient.invalidateQueries(['todos'])
+      navigate(paths.root)
     },
     onError: (error: ErrorResponse) => {
-      console.error(error.details)
+      alert(error)
     },
   })
   const signUpMutation = useMutation(signUp, {
     onSuccess: (value) => {
       setToken(value.token)
       queryClient.invalidateQueries(['todos'])
+      navigate(paths.root)
     },
     onError: (error: ErrorResponse) => {
-      console.error(error.details)
+      alert(error)
     },
   })
 
   return (
-    <SimpleGrid cols={2}>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          loginMutation.mutate(values)
-        })}
-      >
-        <TextInput
-          label="email"
-          placeholder='example@gmail.com'
-          withAsterisk
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          label="password"
-          placeholder='password'
-          withAsterisk
-          {...form.getInputProps('password')}
-        />
-        <Group position="center" mt="md">
-          <Button type="submit">로그인</Button>
-        </Group>
-      </form>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          signUpMutation.mutate(values)
-        })}
-      >
-        <TextInput
-          label="email"
-          placeholder='example@gmail.com'
-          withAsterisk
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          label="password"
-          placeholder='password'
-          withAsterisk
-          {...form.getInputProps('password')}
-        />
-        <Group position="center" mt="md">
-          <Button type="submit">회원가입</Button>
-        </Group>
-      </form>
-    </SimpleGrid>
+    <>
+      <SimpleGrid cols={2}>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            console.log('로그인')
+            loginMutation.mutate(values)
+          })}
+        >
+          <TextInput
+            label="email"
+            placeholder='example@gmail.com'
+            withAsterisk
+            {...form.getInputProps('email')}
+          />
+          <PasswordInput
+            label="password"
+            placeholder='password'
+            withAsterisk
+            {...form.getInputProps('password')}
+          />
+          <Group position="center" mt="md">
+            <Button type="submit">로그인</Button>
+          </Group>
+        </form>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            signUpMutation.mutate(values)
+          })}
+        >
+          <TextInput
+            label="email"
+            placeholder='example@gmail.com'
+            withAsterisk
+            {...form.getInputProps('email')}
+          />
+          <PasswordInput
+            label="password"
+            placeholder='password'
+            withAsterisk
+            {...form.getInputProps('password')}
+          />
+          <Group position="center" mt="md">
+            <Button type="submit">회원가입</Button>
+          </Group>
+        </form>
+      </SimpleGrid>
+    </>
   )
 }
