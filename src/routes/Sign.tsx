@@ -54,6 +54,7 @@ export const Sign = () => {
       alert(error)
     },
   })
+  const isInvalid = !(form.isValid() && form.isTouched())
 
   return (
     <>
@@ -77,7 +78,9 @@ export const Sign = () => {
             {...form.getInputProps('password')}
           />
           <Group position="center" mt="md">
-            <Button type="submit">로그인</Button>
+            <Button type="submit" disabled={isInvalid}>
+              로그인
+            </Button>
           </Group>
         </form>
         <form
@@ -98,7 +101,9 @@ export const Sign = () => {
             {...form.getInputProps('password')}
           />
           <Group position="center" mt="md">
-            <Button type="submit">회원가입</Button>
+            <Button type="submit" disabled={isInvalid}>
+              회원가입
+            </Button>
           </Group>
         </form>
       </SimpleGrid>
