@@ -8,3 +8,4 @@ export interface Todo {
 
 export type TodoInput = Pick<Todo, 'title' | 'content'>
 
+export type TodoId = Pick<Todo, 'id'>

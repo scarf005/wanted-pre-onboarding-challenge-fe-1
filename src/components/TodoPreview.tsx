@@ -1,13 +1,10 @@
-// import { useQuery } from 'react-query'
-import { getTodos } from 'api'
-import { Button, Skeleton, Stack, Text } from '@mantine/core'
-import { ErrorResponse, Todo, TodoResponse } from 'types'
-import { redirect, useNavigate } from 'react-router-dom'
-import { match } from 'ts-pattern'
-import { naturals, todoSkeletons } from './TodoSkeleton'
-import { TodoItem } from './TodoItem'
 import { truncate } from '../utils/truncate'
-import { useQuery } from '@tanstack/react-query'
+import { TodoItem } from './TodoItem'
+import { todoSkeletons } from './TodoSkeleton'
+import { Stack, Text } from '@mantine/core'
+import { useGetTodosQuery } from 'queries'
+import { match } from 'ts-pattern'
+import { Todo } from 'types'
 
 const truncatedTodo = (todo: Todo): Todo => {
   const { title, content } = todo
@@ -24,7 +21,7 @@ const todoList = (todos: Todo[]) => () =>
   )
 
 export const TodoPreview = () => {
-  const { data: todos, status } = useQuery({ queryKey: ['todos'], queryFn: getTodos})
+  const { data: todos, status } = useGetTodosQuery()
 
   const content = match(status)
     .with('loading', () => todoSkeletons)

@@ -1,27 +1,20 @@
-import { useMutation } from '@tanstack/react-query'
-import { createTodo } from 'api'
-import { queryClient } from 'App'
+import { useCreateTodoMutation } from 'queries'
 
 const AddTodo = () => {
-  const mutation = useMutation(createTodo, {
-    onSuccess: () => queryClient.invalidateQueries(['todos']),
-  })
-
+  const { isLoading, isError, isSuccess, error, mutate } = useCreateTodoMutation()
   return (
     <div>
-      {mutation.isLoading ? (
+      {isLoading ? (
         'Loading...'
       ) : (
         <>
-          {mutation.isError ? (
-            <div>An error occurred: {mutation.error as string}</div>
-          ) : null}
+          {isError ? <div>An error occurred: {error as string}</div> : null}
 
-          {mutation.isSuccess ? <div>Todo added!</div> : null}
+          {isSuccess ? <div>Todo added!</div> : null}
 
           <button
             onClick={() => {
-              mutation.mutate({ title: 'Do Laundry', content: 'foo' })
+              mutate({ title: 'Do Laundry', content: 'foo' })
             }}
           >
             Create Todo

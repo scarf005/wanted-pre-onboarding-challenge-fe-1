@@ -1,43 +1,19 @@
+import { Paper, SimpleGrid, Text, Title } from '@mantine/core'
+import { usePrevious } from '@mantine/hooks'
 import { TodoPreview } from 'components'
-import {
-  Paper,
-  SimpleGrid,
-  Skeleton,
-  Stack,
-  Text,
-  Textarea,
-  Title,
-} from '@mantine/core'
-import { getTodoById, getTodos } from 'api'
-import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useGetTodoQuery } from 'queries'
 import { useLocation } from 'react-router-dom'
 
-const todoQuery = (id: string) => ({
-  queryKey: ['todos', id],
-  queryFn: () => getTodoById(id),
-})
-
-// export const TodoTextArea = ({ initial }: { initial: string }) => {
-//   const [text, setText] = useState(initial)
-
-//   return (
-//     <Textarea value={text} onChange={(e) => setText(e.currentTarget.value)} />
-//   )
-// }
-
-export const TodoContent = ({ id }: { id: string }) => {
-  const { data: todo, isSuccess } = useQuery(todoQuery(id))
-
-  if (!isSuccess) {
-    return <Skeleton height="80vh" />
-  }
+type Props = { id: string }
+export const TodoContent = ({ id }: Props) => {
+  const { data, isSuccess } = useGetTodoQuery(id)
+  const previous = usePrevious(data)
+  const todo = isSuccess ? data : previous
 
   return (
     <>
-      <Title>{todo.title}</Title>
-      <Text>{todo.content}</Text>
-      {/* <TodoTextArea initial={todo.content} /> */}
+      <Title>{todo?.title}</Title>
+      <Text>{todo?.content}</Text>
     </>
   )
 }
