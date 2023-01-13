@@ -7,7 +7,7 @@ import { isSignedIn } from 'utils'
 type ValueOf<T> = T[keyof T]
 
 type Props = {
-  path: ValueOf<typeof paths>
+  path?: ValueOf<typeof paths>
   element: JSX.Element
 }
 
