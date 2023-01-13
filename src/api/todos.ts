@@ -1,6 +1,7 @@
 import ky, { Options } from 'ky'
 import { HttpMethod } from 'ky/distribution/types/options'
 import { TodoInput, TodoResponse, TodosResponse } from 'types'
+import { tokenRepository } from 'utils'
 
 export const url = import.meta.env.VITE_API_URL
 
@@ -13,7 +14,7 @@ type StrictMethodOptions = ReplaceType<Options, 'method', HttpMethod>
 const options = {
   method: 'get',
   headers: {
-    Authorization: localStorage.getItem('token') ?? '',
+    Authorization: tokenRepository.value,
   },
 } satisfies StrictMethodOptions
 

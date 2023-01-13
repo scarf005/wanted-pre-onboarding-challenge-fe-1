@@ -1,24 +1,24 @@
 import { redirect, useNavigate } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
-import { isLoggedInAtom } from 'atom'
 import { Button } from '@mantine/core'
 import { paths } from 'routes/paths'
+import { isSignedIn } from 'utils'
 
 type ValueOf<T> = T[keyof T]
 
 type Props = {
   path: ValueOf<typeof paths>
-  children: JSX.Element
+  element: JSX.Element
 }
 
 export const UnAuthorizedOnly = ({
   path = paths.root,
-  children,
+  element,
 }: Props): JSX.Element => {
   const navigate = useNavigate()
 
-  if (useAtomValue(isLoggedInAtom)) {
+  if (isSignedIn()) {
     navigate(path)
   }
-  return children
+  return element
 }

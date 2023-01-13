@@ -1,20 +1,20 @@
-import { hasLength, useForm } from '@mantine/form'
-import { AuthInput, ErrorResponse } from 'types'
-import { isEmail } from '@mantine/form'
+import { paths } from './paths'
 import {
   Button,
   Group,
+  PasswordInput,
   SimpleGrid,
   TextInput,
-  PasswordInput,
 } from '@mantine/core'
-import { login, signUp } from 'api'
-import { queryClient } from 'App'
-import { tokenAtom } from 'atom'
+import { hasLength, useForm } from '@mantine/form'
+import { isEmail } from '@mantine/form'
 import { useMutation } from '@tanstack/react-query'
+import { queryClient } from 'App'
+import { login, signUp } from 'api'
 import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
-import { paths } from './paths'
+import { AuthInput, ErrorResponse } from 'types'
+import { tokenRepository } from 'utils'
 
 const PASSWORD_LENGTH = 8 as const
 
@@ -32,11 +32,10 @@ export const Sign = () => {
       ),
     },
   })
-  const setToken = useSetAtom(tokenAtom)
   const navigate = useNavigate()
   const loginMutation = useMutation(login, {
     onSuccess: (value) => {
-      setToken(value.token)
+      tokenRepository.value = value.token
       queryClient.invalidateQueries(['todos'])
       navigate(paths.root)
     },
@@ -46,7 +45,7 @@ export const Sign = () => {
   })
   const signUpMutation = useMutation(signUp, {
     onSuccess: (value) => {
-      setToken(value.token)
+      tokenRepository.value = value.token
       queryClient.invalidateQueries(['todos'])
       navigate(paths.root)
     },
