@@ -1,7 +1,17 @@
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import {
+  QueryCache,
+  QueryClient,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query'
 import { createTodo, deleteTodo, getTodoById, getTodos, updateTodo } from 'api'
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) =>
+      alert(`An error has occurred: ${JSON.stringify(error)}`),
+  }),
+})
 
 export const useGetTodosQuery = () =>
   useQuery({ queryKey: ['todos'], queryFn: getTodos })
