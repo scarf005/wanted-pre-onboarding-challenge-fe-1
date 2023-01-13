@@ -1,26 +1,19 @@
 import { Paper, SimpleGrid, Text, Title } from '@mantine/core'
-import { useQuery } from '@tanstack/react-query'
-import { getTodoById, getTodos } from 'api'
+import { usePrevious } from '@mantine/hooks'
 import { TodoPreview } from 'components'
+import { useGetTodoQuery } from 'queries'
 import { useLocation } from 'react-router-dom'
 
-const todoQuery = (id: string) => ({
-  queryKey: ['todos', id],
-  queryFn: () => getTodoById({ id }),
-})
-
-export const TodoContent = ({ id }: { id: string }) => {
-  const { data: todo, isSuccess } = useQuery(todoQuery(id))
-
-  if (!isSuccess) {
-    return null
-  }
+type Props = { id: string }
+export const TodoContent = ({ id }: Props) => {
+  const { data, isSuccess } = useGetTodoQuery(id)
+  const previous = usePrevious(data)
+  const todo = isSuccess ? data : previous
 
   return (
     <>
-      <Title>{todo.title}</Title>
-      <Text>{todo.content}</Text>
-      {/* <TodoTextArea initial={todo.content} /> */}
+      <Title>{todo?.title}</Title>
+      <Text>{todo?.content}</Text>
     </>
   )
 }
