@@ -1,4 +1,4 @@
-import { Group, Skeleton } from '@mantine/core'
+import { Skeleton } from '@mantine/core'
 
 export const naturals = (size: number) => [...Array(size).keys()]
 

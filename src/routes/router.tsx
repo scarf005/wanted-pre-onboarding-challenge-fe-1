@@ -1,9 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { Home, Sign } from 'routes'
 import { paths } from './paths'
-import { AppShell, Button, Group, Header, Title } from '@mantine/core'
+import { AppShell, Group, Header, Title } from '@mantine/core'
 import { AuthButton, EnforceAuth as SignedInOnly } from 'components'
 import { UnAuthorizedOnly as SignedOutOnly } from 'components/UnAuthorizedOnly'
+import { createBrowserRouter } from 'react-router-dom'
+import { Home, Sign } from 'routes'
 
 export const AppShelled = ({ element }: { element: JSX.Element }) => (
   <AppShell

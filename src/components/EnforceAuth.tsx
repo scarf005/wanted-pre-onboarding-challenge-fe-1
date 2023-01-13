@@ -1,6 +1,5 @@
-import { redirect, useNavigate } from 'react-router-dom'
-import { useAtomValue } from 'jotai'
 import { Button } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
 import { paths } from 'routes/paths'
 import { isSignedIn } from 'utils'
 
