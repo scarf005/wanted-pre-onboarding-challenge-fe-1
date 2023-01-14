@@ -17,7 +17,7 @@ export const queryClient = new QueryClient({
 export const useTodosQuery = <T>(select?: (data: Todo[]) => T) =>
   useQuery({ queryKey: ['todos'], queryFn: getTodos, select })
 
-export const useTodosCount = () => useTodosQuery<number>((data) => data.length)
+export const useTodosCount = () => useTodosQuery((data) => data.length)
 
 export const useTodoQuery = (id: string) =>
   useTodosQuery((data) => data.find((todo) => todo.id === id))
