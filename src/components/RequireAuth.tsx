@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { paths } from 'routes/paths'
 import { isSignedIn } from 'utils'
 
-export const RequireAuth = ({
-  children,
-}: { children: JSX.Element }): JSX.Element => {
+type Props = {
+  children: JSX.Element
+}
+export const RequireAuth = ({ children }: Props): JSX.Element => {
   const navigate = useNavigate()
   return isSignedIn() ? (
     children
