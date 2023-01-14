@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { paths } from 'routes/paths'
 import { isSignedIn } from 'utils'
 
-export const EnforceAuth = ({
+export const RequireAuth = ({
   children,
 }: { children: JSX.Element }): JSX.Element => {
   const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import { paths } from './paths'
 import { AppShell, Group, Header, Title } from '@mantine/core'
-import { AuthButton, EnforceAuth as SignedInOnly } from 'components'
-import { UnAuthorizedOnly } from 'components/UnAuthorizedOnly'
+import { AuthButton, RequireAuth } from 'components'
+import { RequireNoAuth } from 'components'
 import { createBrowserRouter } from 'react-router-dom'
 import { Home, Sign } from 'routes'
 
@@ -17,7 +17,7 @@ export const AppShelled = ({ element }: { element: JSX.Element }) => (
       </Header>
     }
   >
-    <SignedInOnly>{element}</SignedInOnly>
+    <RequireAuth>{element}</RequireAuth>
   </AppShell>
 )
 
@@ -32,10 +32,10 @@ export const router = createBrowserRouter([
   },
   {
     path: paths.signIn,
-    element: <UnAuthorizedOnly element={<Sign />} />,
+    element: <RequireNoAuth element={<Sign />} />,
   },
   {
     path: paths.login,
-    element: <UnAuthorizedOnly element={<Sign />} />,
+    element: <RequireNoAuth element={<Sign />} />,
   },
 ])

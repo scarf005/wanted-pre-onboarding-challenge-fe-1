@@ -11,7 +11,7 @@ type Props = {
   element: JSX.Element
 }
 
-export const UnAuthorizedOnly = ({
+export const RequireNoAuth = ({
   path = paths.root,
   element,
 }: Props): JSX.Element => {
