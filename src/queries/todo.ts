@@ -5,6 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { createTodo, deleteTodo, getTodoById, getTodos, updateTodo } from 'api'
+import { Todo } from 'types'
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -13,11 +14,13 @@ export const queryClient = new QueryClient({
   }),
 })
 
-export const useGetTodosQuery = () =>
-  useQuery({ queryKey: ['todos'], queryFn: getTodos })
+export const useTodosQuery = <T>(select?: (data: Todo[]) => T) =>
+  useQuery({ queryKey: ['todos'], queryFn: getTodos, select })
 
-export const useGetTodoQuery = (id: string) =>
-  useQuery({ queryKey: ['todos', id], queryFn: () => getTodoById({ id }) })
+export const useTodosCount = () => useTodosQuery<number>((data) => data.length)
+
+export const useTodoQuery = (id: string) =>
+  useTodosQuery((data) => data.find((todo) => todo.id === id))
 
 export const useCreateTodoMutation = () =>
   useMutation(createTodo, {
