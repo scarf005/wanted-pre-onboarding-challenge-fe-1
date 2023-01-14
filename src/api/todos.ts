@@ -11,37 +11,35 @@ type ReplaceType<T, K extends keyof T, NewType> = {
 
 type StrictMethodOptions = ReplaceType<Options, 'method', HttpMethod>
 
-const api = ky.extend({
-  prefixUrl: url,
-  method: 'get',
-  headers: {
-    Authorization: tokenRepository.value,
-  },
-})
+const api = () =>
+  ky.extend({
+    prefixUrl: url,
+    headers: {
+      Authorization: tokenRepository.value,
+    },
+  })
 
 export const getTodos = () =>
-  api
+  api()
     .get('todos')
     .json<TodosResponse>()
     .then((res) => res.data)
 
 type GetTodoByIdParam = TodoId
 export const getTodoById = ({ id }: GetTodoByIdParam) =>
-  api
+  api()
     .get(`todos/${id}`)
     .json<TodoResponse>()
     .then((res) => res.data)
 
 type CreateTodoParam = TodoInput
 export const createTodo = (json: CreateTodoParam) =>
-  api.post('todos', { json }).json<TodoResponse>()
+  api().post('todos', { json }).json<TodoResponse>()
 
 type UpdateTodoParam = TodoId & TodoInput
 export const updateTodo = ({ id, content, title }: UpdateTodoParam) =>
-  api
-    .put(`todos/${id}`, { json: { content, title } })
-    .json<TodoResponse>()
+  api().put(`todos/${id}`, { json: { content, title } }).json<TodoResponse>()
 
 type DeleteTodoParam = TodoId
 export const deleteTodo = ({ id }: DeleteTodoParam) =>
-  api.delete(`todos/${id}`).json<TodoResponse>()
+  api().delete(`todos/${id}`).json<TodoResponse>()
