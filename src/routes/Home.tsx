@@ -1,12 +1,12 @@
 import { Paper, SimpleGrid, Text, Title } from '@mantine/core'
 import { usePrevious } from '@mantine/hooks'
 import { TodoPreview } from 'components'
-import { useGetTodoQuery } from 'queries'
+import { useTodoQuery } from 'queries'
 import { useLocation } from 'react-router-dom'
 
 type Props = { id: string }
 export const TodoContent = ({ id }: Props) => {
-  const { data, isSuccess } = useGetTodoQuery(id)
+  const { data, isSuccess } = useTodoQuery(id)
   const previous = usePrevious(data)
   const todo = isSuccess ? data : previous
 

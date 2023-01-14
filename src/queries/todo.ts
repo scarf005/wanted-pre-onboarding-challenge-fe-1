@@ -13,10 +13,10 @@ export const queryClient = new QueryClient({
   }),
 })
 
-export const useGetTodosQuery = () =>
+export const useTodosQuery = () =>
   useQuery({ queryKey: ['todos'], queryFn: getTodos })
 
-export const useGetTodoQuery = (id: string) =>
+export const useTodoQuery = (id: string) =>
   useQuery({ queryKey: ['todos', id], queryFn: () => getTodoById({ id }) })
 
 export const useCreateTodoMutation = () =>

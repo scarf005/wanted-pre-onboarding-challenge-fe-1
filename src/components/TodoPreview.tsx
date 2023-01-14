@@ -2,7 +2,7 @@ import { truncate } from '../utils/truncate'
 import { TodoItem } from './TodoItem'
 import { todoSkeletons } from './TodoSkeleton'
 import { Stack, Text } from '@mantine/core'
-import { useGetTodosQuery } from 'queries'
+import { useTodosQuery } from 'queries'
 import { match } from 'ts-pattern'
 import { Todo } from 'types'
 
@@ -21,7 +21,7 @@ const todoList = (todos: Todo[]) => () =>
   )
 
 export const TodoPreview = () => {
-  const { data: todos, status } = useGetTodosQuery()
+  const { data: todos, status } = useTodosQuery()
 
   const content = match(status)
     .with('loading', () => todoSkeletons)
