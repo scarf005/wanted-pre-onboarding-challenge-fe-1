@@ -1,24 +1,28 @@
 import re
 import sys
 from subprocess import run
-from typing import Final
+from typing import Final, NewType
 
 commit_regex = re.compile(r"(?P<type>.+): (?P<subject>.*)")
+CommitTitle = NewType("CommitTitle", str)
 
 
-def is_conventional_title(title: str) -> bool:
-    return bool(commit_regex.match(title))
+def get_title() -> str:
+    match sys.argv:
+        case [_, title]:
+            return title
+        case _:
+            return input("Enter commit title: ")
 
 
-if len(sys.argv) < 2:
-    print("No argument supplied")
-    sys.exit(1)
+def parse_conventional_title(title: str) -> CommitTitle:
+    if not (result := commit_regex.match(title)):
+        raise ValueError("Invalid commit title")
 
-title: Final = sys.argv[1]
-if not is_conventional_title(title):
-    print("Invalid commit title")
-    sys.exit(1)
+    return CommitTitle(result.group("subject"))
 
+
+title: Final = parse_conventional_title(get_title())
 commits: Final = run(
     [
         "git",
