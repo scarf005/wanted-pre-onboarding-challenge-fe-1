@@ -1,23 +1,5 @@
-import ky, { Options } from 'ky'
-import { HttpMethod } from 'ky/distribution/types/options'
-import { Todo, TodoId, TodoInput, TodoResponse, TodosResponse } from 'types'
-import { tokenRepository } from 'utils'
-
-export const url = import.meta.env.VITE_API_URL
-
-type ReplaceType<T, K extends keyof T, NewType> = {
-  [P in keyof T]: P extends K ? NewType : T[P]
-}
-
-type StrictMethodOptions = ReplaceType<Options, 'method', HttpMethod>
-
-const api = () =>
-  ky.extend({
-    prefixUrl: url,
-    headers: {
-      Authorization: tokenRepository.value,
-    },
-  })
+import { TodoId, TodoInput, TodoResponse, TodosResponse } from 'types'
+import { api } from './api'
 
 export const getTodos = () =>
   api()
