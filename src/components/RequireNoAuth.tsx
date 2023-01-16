@@ -7,11 +7,11 @@ import { isSignedIn } from 'utils'
 type ValueOf<T> = T[keyof T]
 
 type Props = {
-  path: ValueOf<typeof paths>
+  path?: ValueOf<typeof paths>
   element: JSX.Element
 }
 
-export const UnAuthorizedOnly = ({
+export const RequireNoAuth = ({
   path = paths.root,
   element,
 }: Props): JSX.Element => {

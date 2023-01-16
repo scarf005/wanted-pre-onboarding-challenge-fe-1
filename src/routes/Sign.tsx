@@ -1,4 +1,3 @@
-import { paths } from './paths'
 import {
   Button,
   Group,
@@ -8,12 +7,8 @@ import {
 } from '@mantine/core'
 import { hasLength, useForm } from '@mantine/form'
 import { isEmail } from '@mantine/form'
-import { useMutation } from '@tanstack/react-query'
-import { login, signUp } from 'api'
-import { queryClient } from 'queries'
-import { useNavigate } from 'react-router-dom'
+import { useLoginMutation, useSignUpMutation } from 'queries'
 import { AuthInput, ErrorResponse } from 'types'
-import { tokenRepository } from 'utils'
 
 const PASSWORD_LENGTH = 8 as const
 
@@ -31,27 +26,9 @@ export const Sign = () => {
       ),
     },
   })
-  const navigate = useNavigate()
-  const loginMutation = useMutation(login, {
-    onSuccess: (value) => {
-      tokenRepository.value = value.token
-      queryClient.invalidateQueries(['todos'])
-      navigate(paths.root)
-    },
-    onError: (error: ErrorResponse) => {
-      alert(error)
-    },
-  })
-  const signUpMutation = useMutation(signUp, {
-    onSuccess: (value) => {
-      tokenRepository.value = value.token
-      queryClient.invalidateQueries(['todos'])
-      navigate(paths.root)
-    },
-    onError: (error: ErrorResponse) => {
-      alert(error)
-    },
-  })
+  const loginMutation = useLoginMutation()
+  const signUpMutation = useSignUpMutation()
+
   const isInvalid = !(form.isValid() && form.isTouched())
 
   return (
