@@ -1,7 +1,8 @@
 import { useCreateTodoMutation } from 'queries'
 
 const AddTodo = () => {
-  const { isLoading, isError, isSuccess, error, mutate } = useCreateTodoMutation()
+  const { isLoading, isError, isSuccess, error, mutate } =
+    useCreateTodoMutation()
   return (
     <div>
       {isLoading ? (

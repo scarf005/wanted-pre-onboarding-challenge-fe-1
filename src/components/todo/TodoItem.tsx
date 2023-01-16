@@ -1,4 +1,4 @@
-import { truncate } from '../utils/truncate'
+import { truncate } from '../../utils/truncate'
 import { ActionIcon, NavLink } from '@mantine/core'
 import { IconChevronRight, IconX } from '@tabler/icons'
 import { useNavigate } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import { truncate } from '../utils/truncate'
+import { truncate } from 'utils/truncate'
 import { TodoItem } from './TodoItem'
 import { todoSkeletons } from './TodoSkeleton'
 import { Stack, Text } from '@mantine/core'
