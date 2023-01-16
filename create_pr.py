@@ -3,9 +3,6 @@ import sys
 from subprocess import run
 from typing import Final, NewType
 
-commit_regex = re.compile(r"(?P<type>.+): (?P<subject>.*)")
-CommitTitle = NewType("CommitTitle", str)
-
 
 def get_title() -> str:
     match sys.argv:
@@ -15,11 +12,15 @@ def get_title() -> str:
             return input("Enter commit title: ")
 
 
-def parse_conventional_title(title: str) -> CommitTitle:
-    if not (result := commit_regex.match(title)):
-        raise ValueError("Invalid commit title")
+commit_regex = re.compile(r"(?P<type>.+): (?P<subject>.*)")
+CommitTitle = NewType("CommitTitle", str)
 
-    return CommitTitle(result.group("subject"))
+
+def parse_conventional_title(title: str) -> CommitTitle:
+    if not commit_regex.match(title):
+        raise ValueError(f"Invalid commit title {title}")
+
+    return CommitTitle(title)
 
 
 title: Final = parse_conventional_title(get_title())
@@ -34,9 +35,9 @@ commits: Final = run(
     capture_output=True,
     check=True,
 ).stdout.decode("utf-8")
-HEADER = "개요"
+
 BODY = f"""\
-## {HEADER}
+## 개요
 
 {commits}"""
 
