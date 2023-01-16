@@ -7,7 +7,8 @@ import { tokenRepository } from 'utils'
 
 export const useLoginMutation = () => {
   const navigate = useNavigate()
-  return useMutation(login, {
+  return useMutation({
+    mutationFn: login,
     onSuccess: (value) => {
       tokenRepository.value = value.token
       queryClient.invalidateQueries(['todos'])
@@ -17,7 +18,8 @@ export const useLoginMutation = () => {
 }
 export const useSignUpMutation = () => {
   const navigate = useNavigate()
-  return useMutation(signUp, {
+  return useMutation({
+    mutationFn: signUp,
     onSuccess: (value) => {
       tokenRepository.value = value.token
       queryClient.invalidateQueries(['todos'])
