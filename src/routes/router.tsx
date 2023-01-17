@@ -46,4 +46,8 @@ export const router = createBrowserRouter([
       </RequireNoAuth>
     ),
   },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ])
