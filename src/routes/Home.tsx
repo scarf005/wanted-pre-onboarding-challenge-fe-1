@@ -42,12 +42,15 @@ export const TodoContent = ({ id }: Props) => {
 
 export const Content = () => {
   const { id } = useParams()
-  const { data } = useTodoQuery(id ?? '')
+  const { data, isLoading } = useTodoQuery(id ?? '')
 
   if (!id) {
     return <Title>TODO를 선택해주세요</Title>
   }
 
+  if (isLoading) {
+    return <Title>로딩중...</Title>
+  }
   if (!data) {
     return <NotFound text='존재하지 않는 글입니다' />
   }
