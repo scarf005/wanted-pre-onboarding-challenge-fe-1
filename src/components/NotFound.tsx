@@ -1,4 +1,4 @@
-import { Button, Stack, Title } from '@mantine/core'
+import { Button, Center, Stack, Title } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
 import { paths } from 'routes/paths'
 
@@ -16,9 +16,11 @@ export const NotFound = ({
   button = <NavigateHomeButton />,
 }: Props) => {
   return (
-    <Stack align='center' sx={{ width: '100vw' }}>
-      <Title>{text}</Title>
-      {button}
-    </Stack>
+    <Center sx={{ height: '100%' }}>
+      <Stack align='center'>
+        <Title>{text}</Title>
+        {button}
+      </Stack>
+    </Center>
   )
 }

@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 import { usePrevious } from '@mantine/hooks'
 import { IconX } from '@tabler/icons'
-import { TodoPreview } from 'components'
+import { NotFound, TodoPreview } from 'components'
 import { useDeleteTodoMutation, useTodoQuery } from 'queries'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
@@ -42,14 +42,17 @@ export const TodoContent = ({ id }: Props) => {
 
 export const Content = () => {
   const { id } = useParams()
+  const { data } = useTodoQuery(id ?? '')
 
-  const detail = id ? (
-    <TodoContent id={id} />
-  ) : (
-    <Title>TODO를 선택해주세요</Title>
-  )
+  if (!id) {
+    return <Title>TODO를 선택해주세요</Title>
+  }
 
-  return <Paper>{detail}</Paper>
+  if (!data) {
+    return <NotFound text='존재하지 않는 글입니다' />
+  }
+
+  return <TodoContent id={id} />
 }
 
 export const Home = () => {
