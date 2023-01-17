@@ -8,12 +8,12 @@ type ValueOf<T> = T[keyof T]
 
 type Props = {
   path?: ValueOf<typeof paths>
-  element: JSX.Element
+  children: JSX.Element
 }
 
 export const RequireNoAuth = ({
   path = paths.root,
-  element,
+  children: element,
 }: Props): JSX.Element => {
   const navigate = useNavigate()
 

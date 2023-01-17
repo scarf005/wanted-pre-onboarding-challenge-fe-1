@@ -1,6 +1,6 @@
 import { paths } from './paths'
 import { AppShell, Group, Header, Title } from '@mantine/core'
-import { AuthButton, RequireAuth } from 'components'
+import { AuthButton, NotFound, RequireAuth } from 'components'
 import { RequireNoAuth } from 'components'
 import { createBrowserRouter } from 'react-router-dom'
 import { Home, Sign } from 'routes'
@@ -32,10 +32,18 @@ export const router = createBrowserRouter([
   },
   {
     path: paths.signIn,
-    element: <RequireNoAuth element={<Sign />} />,
+    element: (
+      <RequireNoAuth>
+        <Sign />
+      </RequireNoAuth>
+    ),
   },
   {
     path: paths.login,
-    element: <RequireNoAuth element={<Sign />} />,
+    element: (
+      <RequireNoAuth>
+        <Sign />
+      </RequireNoAuth>
+    ),
   },
 ])
