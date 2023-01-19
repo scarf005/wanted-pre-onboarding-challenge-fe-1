@@ -66,6 +66,7 @@ pnpm install && pnpm run dev
   - [x] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
 
 ## 사용 기술
+
 선택 조건:
 
 - 가벼운가?
@@ -136,3 +137,19 @@ export const createTodo = (json: TodoInput) =>
 [mantine]: https://mantine.dev
 [ladle]: https://github.com/tajo/ladle
 [rome]: https://rome.tools/
+
+## 폴더 구조
+
+구분 기준: 관련된 동작 위주로 분류
+
+```
+src
+├── api (백엔드 통신용 HTTP API)
+├── components
+│   ├── hoc (고차 컴포넌트 래퍼 Higher Order Component)
+│   └── todo (Todo관련 컴포넌트들)
+├── queries (리액트 쿼리 후크)
+├── routes (라우팅 테이블)
+├── types (전역 타입 정의)
+└── utils (로컬스토리지, 문자열 줄임표 등 유틸리티 함수)
+```
