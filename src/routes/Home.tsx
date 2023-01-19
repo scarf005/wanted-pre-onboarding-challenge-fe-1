@@ -9,9 +9,9 @@ import {
 } from '@mantine/core'
 import { usePrevious } from '@mantine/hooks'
 import { IconX } from '@tabler/icons'
-import { TodoPreview } from 'components'
+import { NotFound, TodoPreview } from 'components'
 import { useDeleteTodoMutation, useTodoQuery } from 'queries'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 type Props = { id: string }
 export const TodoContent = ({ id }: Props) => {
@@ -41,13 +41,21 @@ export const TodoContent = ({ id }: Props) => {
 }
 
 export const Content = () => {
-  const location = useLocation()
-  const id = location.pathname.split('/').at(-1) as string
+  const { id } = useParams()
+  const { data, isLoading } = useTodoQuery(id ?? '')
 
-  const detail =
-    id !== '' ? <TodoContent id={id} /> : <Title>TODO를 선택해주세요</Title>
+  if (!id) {
+    return <Title>TODO를 선택해주세요</Title>
+  }
 
-  return <Paper>{detail}</Paper>
+  if (isLoading) {
+    return <Title>로딩중...</Title>
+  }
+  if (!data) {
+    return <NotFound text='존재하지 않는 글입니다' />
+  }
+
+  return <TodoContent id={id} />
 }
 
 export const Home = () => {
