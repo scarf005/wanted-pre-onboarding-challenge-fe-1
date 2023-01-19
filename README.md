@@ -66,6 +66,7 @@ pnpm install && pnpm run dev
   - [x] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
 
 ## 사용 기술
+선택 조건:
 
 - 가벼운가?
 - 사용하기 편리한가?
@@ -80,6 +81,17 @@ pnpm install && pnpm run dev
 
 - 필수 컴포넌트 기능 (`Grid`, `Table`, `Input` 등등)
 - 폼 라이브러리
+
+### 컴포넌트 스토리북: [ladle][ladle]
+
+```ts
+// World.story.ts
+export const World = () => <p>Hello</p>
+```
+
+- vite와 호환됨
+- 초기 설치 필요 없음 (storybook: 30초+)
+- 매우 빠름 (< 500ms)
 
 ### 상태 관리: [jotai][jotai]
 
@@ -122,4 +134,5 @@ export const createTodo = (json: TodoInput) =>
 [react query]: https://tanstack.com/query/latest/docs/react/overview
 [react-router-dom(v6)]: https://github.com/remix-run/react-router
 [mantine]: https://mantine.dev
+[ladle]: https://github.com/tajo/ladle
 [rome]: https://rome.tools/
