@@ -2,18 +2,30 @@
 
 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제
 
+## 소개
+
+| 루트          |           스크린샷           |
+| ------------- | :--------------------------: |
+| `/`           |    ![](docs/img/root.png)    |
+| `/todos/:id`  |  ![](docs/img/todos-id.png)  |
+| `/auth/login` | ![](docs/img/auth-login.png) |
+| 404           |    ![](docs/img/404.png)     |
+
 ## 실행 방법
 
 ### 백엔드
+
 [백엔드 api 저장소][백엔드]를 `git clone` 한 후, 아래 명령 중 하나를 실행합니다.
 
 ```sh
 yarn install && yarn run start
 pnpm install && pnpm run start
 ```
+
 [백엔드]: https://github.com/zerohyunkim/wanted-pre-onboarding-challenge-fe-1-api
 
 ### 프론트엔드
+
 이 저장소를 `git clone` 한 후, 아래 명령 중 하나를 실행합니다.
 
 ```sh
@@ -21,7 +33,41 @@ yarn install && yarn run dev
 pnpm install && pnpm run dev
 ```
 
+## [구현 목록][구현 목록]
+
+[구현 목록]: https://github.com/zerohyunkim/wanted-pre-onboarding-challenge-fe-1-api/blob/master/README.md#1-2-클라이언트-구현-과제-안내
+
+### Assignment 1 - Login / SignUp
+
+- /auth 경로에 로그인 / 회원가입 기능을 개발합니다
+  - 로그인, 회원가입을 별도의 경로로 분리해도 무방합니다
+  - [x] 최소한 이메일, 비밀번호 input, 제출 button을 갖도록 구성해주세요
+- 이메일과 비밀번호의 유효성을 확인합니다
+  - [x] 이메일 조건 : 최소 `@`, `.` 포함
+  - [x] 비밀번호 조건 : 8자 이상 입력
+  - [x] 이메일과 비밀번호가 모두 입력되어 있고, 조건을 만족해야 제출 버튼이 활성화 되도록 해주세요
+- 로그인 API를 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동시켜주세요
+  - [x] 응답으로 받은 토큰은 로컬 스토리지에 저장해주세요
+  - [x] 다음 번에 로그인 시 토큰이 존재한다면 루트 경로로 리다이렉트 시켜주세요
+  - [ ] 어떤 경우든 토큰이 유효하지 않다면 사용자에게 알리고 로그인 페이지로 리다이렉트 시켜주세요
+
+### Assignment 2 - Todo List
+
+- Todo List API를 호출하여 Todo List CRUD 기능을 구현해주세요
+  - [x] 목록 / 상세 영역으로 나누어 구현해주세요
+  - [x] Todo 목록을 볼 수 있습니다.
+  - [ ] Todo 추가 버튼을 클릭하면 할 일이 추가 됩니다.
+  - [ ] Todo 수정 버튼을 클릭하면 수정 모드를 활성화하고, 수정 내용을 제출하거나 취소할 수 있습니다.
+  - [ ] Todo 삭제 버튼을 클릭하면 해당 Todo를 삭제할 수 있습니다.
+- 한 화면 내에서 Todo List와 개별 Todo의 상세를 확인할 수 있도록 해주세요.
+  - [x] 새로고침을 했을 때 현재 상태가 유지되어야 합니다.
+  - [x] 개별 Todo를 조회 순서에 따라 페이지 뒤로가기를 통하여 조회할 수 있도록 해주세요.
+- 한 페이지 내에서 새로고침 없이 데이터가 정합성을 갖추도록 구현해주세요
+  - [x] 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
+
 ## 사용 기술
+
+선택 조건:
 
 - 가벼운가?
 - 사용하기 편리한가?
@@ -36,6 +82,17 @@ pnpm install && pnpm run dev
 
 - 필수 컴포넌트 기능 (`Grid`, `Table`, `Input` 등등)
 - 폼 라이브러리
+
+### 컴포넌트 스토리북: [ladle][ladle]
+
+```ts
+// World.story.ts
+export const World = () => <p>Hello</p>
+```
+
+- vite와 호환됨
+- 초기 설치 필요 없음 (storybook: 30초+)
+- 매우 빠름 (< 500ms)
 
 ### 상태 관리: [jotai][jotai]
 
@@ -78,4 +135,75 @@ export const createTodo = (json: TodoInput) =>
 [react query]: https://tanstack.com/query/latest/docs/react/overview
 [react-router-dom(v6)]: https://github.com/remix-run/react-router
 [mantine]: https://mantine.dev
+[ladle]: https://github.com/tajo/ladle
 [rome]: https://rome.tools/
+
+## 폴더 구조
+
+구분 기준: 관련된 동작 위주로 분류
+
+```
+src
+├── api (백엔드 통신용 HTTP API)
+├── components
+│   ├── hoc (고차 컴포넌트 래퍼 Higher Order Component)
+│   └── todo (Todo관련 컴포넌트들)
+├── queries (리액트 쿼리 후크)
+├── routes (라우팅 테이블)
+├── types (전역 타입 정의)
+└── utils (로컬스토리지, 문자열 줄임표 등 유틸리티 함수)
+```
+
+## 과제 진행 중 고민한 부분
+
+- 라우트를 어떻게 하면 타입 안전하게 짤 수 있을지
+- 어떻게 하면 비즈니스 로직이 변하더라도 재사용 가능하게 짤 수 있을지
+
+## 한계점 및 개선 사항
+
+### [지역성을 고려한 패키지 구조][지역성을 고려한 패키지 구조]
+
+연관된 코드들끼리 모으지 않고 코드의 종류에 따라 구분하여 관련 부분을 수정하고 리팩터링하기 어려움
+
+`개선 방안`: [지역성을 고려한 패키지 구조][지역성을 고려한 패키지 구조] 원칙에 따라 서로 연관성이 높은 코드들을 단일 디렉터리에 배치
+
+[지역성을 고려한 패키지 구조]: https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/
+
+### 테스트
+
+테스트 코드를 작성하지 못했고 작성한 코드도 테스트에 적합하지 않음 (비즈니스 로직과 컴포넌트가 강하게 결합됨)
+
+`개선 방안`:
+
+- [vitest][vitest]와 [react-testing-library]로 컴포넌트 단위 테스트
+- [playwright][playwright]로 E2E 테스트
+- [ladle][ladle]로 빠르게 컴포넌트를 시각적으로 확인 가능하게 수정
+
+[vitest]: https://vitest.dev
+[playwright]: https://playwright.dev
+[react-testing-library]: https://testing-library.com/docs/react-testing-library/intro/
+
+### 라우팅
+
+```ts
+export const router = createBrowserRouter([
+  {
+    path: paths.root,
+    element: <AppShelled element={<Home />} />,
+  },
+  {
+    path: paths.todoItem,
+    element: <AppShelled element={<Home />} />,
+  },
+  ...
+```
+
+`react-router-dom`에 대한 이해도가 부족하여 중복된 코드를 작성함
+
+`개선 방안`: 중첩 라우팅을 사용하여 중복 코드 제거
+
+### CRUD
+
+Create와 Update, Delete 부분을 구현하지 못함
+
+`개선 방안`: 가능한 빨리 기능 구현 예정
