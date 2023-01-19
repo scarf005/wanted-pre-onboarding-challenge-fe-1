@@ -2,18 +2,30 @@
 
 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제
 
+## 소개
+
+| 루트          |           스크린샷           |
+| ------------- | :--------------------------: |
+| `/`           |    ![](docs/img/root.png)    |
+| `/todos/:id`  |  ![](docs/img/todos-id.png)  |
+| `/auth/login` | ![](docs/img/auth-login.png) |
+| 404           |    ![](docs/img/404.png)     |
+
 ## 실행 방법
 
 ### 백엔드
+
 [백엔드 api 저장소][백엔드]를 `git clone` 한 후, 아래 명령 중 하나를 실행합니다.
 
 ```sh
 yarn install && yarn run start
 pnpm install && pnpm run start
 ```
+
 [백엔드]: https://github.com/zerohyunkim/wanted-pre-onboarding-challenge-fe-1-api
 
 ### 프론트엔드
+
 이 저장소를 `git clone` 한 후, 아래 명령 중 하나를 실행합니다.
 
 ```sh
