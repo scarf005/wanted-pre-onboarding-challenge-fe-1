@@ -153,3 +153,57 @@ src
 ├── types (전역 타입 정의)
 └── utils (로컬스토리지, 문자열 줄임표 등 유틸리티 함수)
 ```
+
+## 과제 진행 중 고민한 부분
+
+- 라우트를 어떻게 하면 타입 안전하게 짤 수 있을지
+- 어떻게 하면 비즈니스 로직이 변하더라도 재사용 가능하게 짤 수 있을지
+
+## 한계점 및 개선 사항
+
+### [지역성을 고려한 패키지 구조][지역성을 고려한 패키지 구조]
+
+연관된 코드들끼리 모으지 않고 코드의 종류에 따라 구분하여 관련 부분을 수정하고 리팩터링하기 어려움
+
+`개선 방안`: [지역성을 고려한 패키지 구조][지역성을 고려한 패키지 구조] 원칙에 따라 서로 연관성이 높은 코드들을 단일 디렉터리에 배치
+
+[지역성을 고려한 패키지 구조]: https://ahnheejong.name/articles/package-structure-with-the-principal-of-locality-in-mind/
+
+### 테스트
+
+테스트 코드를 작성하지 못했고 작성한 코드도 테스트에 적합하지 않음 (비즈니스 로직과 컴포넌트가 강하게 결합됨)
+
+`개선 방안`:
+
+- [vitest][vitest]와 [react-testing-library]로 컴포넌트 단위 테스트
+- [playwright][playwright]로 E2E 테스트
+- [ladle][ladle]로 빠르게 컴포넌트를 시각적으로 확인 가능하게 수정
+
+[vitest]: https://vitest.dev
+[playwright]: https://playwright.dev
+[react-testing-library]: https://testing-library.com/docs/react-testing-library/intro/
+
+### 라우팅
+
+```ts
+export const router = createBrowserRouter([
+  {
+    path: paths.root,
+    element: <AppShelled element={<Home />} />,
+  },
+  {
+    path: paths.todoItem,
+    element: <AppShelled element={<Home />} />,
+  },
+  ...
+```
+
+`react-router-dom`에 대한 이해도가 부족하여 중복된 코드를 작성함
+
+`개선 방안`: 중첩 라우팅을 사용하여 중복 코드 제거
+
+### CRUD
+
+Create와 Update, Delete 부분을 구현하지 못함
+
+`개선 방안`: 가능한 빨리 기능 구현 예정
