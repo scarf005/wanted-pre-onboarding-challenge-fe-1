@@ -1,7 +1,7 @@
 import { paths } from '../routes/paths'
 import { useMutation } from '@tanstack/react-query'
 import { login, signUp } from 'api'
-import { queryClient } from 'queries'
+import { queryClient } from 'queryClient'
 import { useNavigate } from 'react-router-dom'
 import { tokenRepository } from 'utils'
 
