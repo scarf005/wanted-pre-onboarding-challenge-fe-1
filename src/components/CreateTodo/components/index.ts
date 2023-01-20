@@ -1,1 +1,1 @@
-export * from './TodoEditModal.stories'
+export * from '../../ToggleableModal/ToggleableModal'
