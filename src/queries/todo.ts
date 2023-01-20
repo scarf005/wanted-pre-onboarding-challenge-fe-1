@@ -13,13 +13,13 @@ export const useTodosQuery = () => useQuery(todosQueryOption)
 export const useTodosCount = () =>
   useQuery({
     ...todosQueryOption,
-    select: data => data.length,
+    select: (data) => data.length,
   })
 
 export const useTodoQuery = (id: string) =>
   useQuery({
     ...todosQueryOption,
-    select: data => data.find(todo => todo.id === id),
+    select: (data) => data.find((todo) => todo.id === id),
   })
 
 export const useDeleteTodoMutation = () =>
