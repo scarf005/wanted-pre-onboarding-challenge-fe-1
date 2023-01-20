@@ -5,14 +5,14 @@ export const getTodos = () =>
   api()
     .get('todos')
     .json<TodosResponse>()
-    .then(res => res.data)
+    .then((res) => res.data)
 
 type GetTodoByIdParam = TodoId
 export const getTodoById = ({ id }: GetTodoByIdParam) =>
   api()
     .get(`todos/${id}`)
     .json<TodoResponse>()
-    .then(res => res.data)
+    .then((res) => res.data)
 
 type DeleteTodoParam = TodoId
 export const deleteTodo = ({ id }: DeleteTodoParam) =>
