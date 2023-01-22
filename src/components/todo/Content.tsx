@@ -1,10 +1,27 @@
 import { paths } from 'routes/paths'
-import { ActionIcon, Group, Paper, Text, Title } from '@mantine/core'
+import {
+  ActionIcon,
+  Button,
+  Group,
+  Paper,
+  Text,
+  Title,
+  Tooltip,
+} from '@mantine/core'
 import { usePrevious } from '@mantine/hooks'
 import { IconX } from '@tabler/icons'
-import { NotFound } from 'components'
+import { NotFound, ToggleableModal } from 'components'
 import { useDeleteTodoMutation, useTodoQuery } from 'queries'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ComponentProps } from 'react'
+
+const DeleteButton = (props: ComponentProps<typeof ActionIcon>) => (
+  <Tooltip label='이 TODO 삭제하기'>
+    <ActionIcon {...props}>
+      <IconX />
+    </ActionIcon>
+  </Tooltip>
+)
 
 type Props = { id: string }
 export const TodoContent = ({ id }: Props) => {
@@ -24,9 +41,15 @@ export const TodoContent = ({ id }: Props) => {
     <Paper>
       <Group position='apart'>
         <Title>{todo?.title}</Title>
-        <ActionIcon onClick={() => deletion({ id })}>
-          <IconX size={12} />
-        </ActionIcon>
+        <ToggleableModal
+          modalProps={{ title: '삭제하기' }}
+          button={<DeleteButton />}
+        >
+          <form>
+            <Text>정말로 삭제하시겠습니까?</Text>
+            <Button onClick={() => deletion({ id })}>삭제하기</Button>
+          </form>
+        </ToggleableModal>
       </Group>
       <Text>{todo?.content}</Text>
     </Paper>
